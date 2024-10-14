@@ -1,5 +1,6 @@
 const UsersTableTestHelper = require("../../../tests/UsersTableTestHelper");
 const InvariantError = require("../../../Commons/exceptions/InvariantError");
+const NotFoundError = require("../../../Commons/exceptions/NotFoundError");
 const RegisterUser = require("../../../Domains/users/entities/RegisterUser");
 const RegisteredUser = require("../../../Domains/users/entities/RegisteredUser");
 const pool = require("../../database/postgres/pool");
@@ -83,6 +84,28 @@ describe("UserRepositoryPostgres", () => {
           fullname: "Dicoding Indonesia",
         })
       );
+    });
+  });
+
+  describe("getUserPassword function", () => {
+    it("should throw InvariantError when user not available", async () => {
+      const userRepositoryPostgres = new UserRepositoryPostgres(pool, {});
+
+      await expect(
+        userRepositoryPostgres.getUserPassword("dicoding")
+      ).rejects.toThrow(NotFoundError);
+    });
+
+    it("should return user password when user is found", async () => {
+      const userRepositoryPostgres = new UserRepositoryPostgres(pool, {});
+
+      await UsersTableTestHelper.addUser({
+        username: "dicoding",
+        password: "secret",
+      });
+
+      const password = await userRepositoryPostgres.getUserPassword("dicoding");
+      expect(password).toEqual("secret");
     });
   });
 });

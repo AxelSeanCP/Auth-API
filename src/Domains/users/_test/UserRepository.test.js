@@ -12,5 +12,8 @@ describe("UserRepository interface", () => {
     await expect(userRepository.verifyAvailableUsername("")).rejects.toThrow(
       "USER_REPOSITORY.METHOD_NOT_IMPLEMENTED"
     );
+    await expect(userRepository.getUserPassword("")).rejects.toThrow(
+      "USER_REPOSITORY.METHOD_NOT_IMPLEMENTED"
+    );
   });
 });
