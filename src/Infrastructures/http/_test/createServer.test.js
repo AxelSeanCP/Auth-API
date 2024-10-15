@@ -414,7 +414,9 @@ describe("HTTP server", () => {
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(400);
       expect(responseJson.status).toEqual("fail");
-      expect(responseJson.message).toEqual("refresh token tidak valid");
+      expect(responseJson.message).toEqual(
+        "refresh token tidak ditemukan di database"
+      );
     });
   });
 
