@@ -2,3 +2,6 @@ node_modules
 .env
 .test.env
 coverage
+package-lock.json
+config/database/test.json
+forum-api-webserver.pem
