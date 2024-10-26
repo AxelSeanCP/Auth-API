@@ -15,28 +15,6 @@ const createServer = async (container) => {
 
   await server.register([
     {
-      plugin: jwt,
-    },
-  ]);
-
-  server.auth.strategy("authapi_jwt", "jwt", {
-    keys: process.env.ACCESS_TOKEN_KEY,
-    verify: {
-      aud: false,
-      iss: false,
-      sub: false,
-      maxAgeSec: process.env.ACCESS_TOKEN_AGE,
-    },
-    validate: (artifacts) => ({
-      isValid: true,
-      credentials: {
-        username: artifacts.decoded.payload.username,
-      },
-    }),
-  });
-
-  await server.register([
-    {
       plugin: users,
       options: { container },
     },

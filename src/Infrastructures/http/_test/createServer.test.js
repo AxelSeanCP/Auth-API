@@ -269,7 +269,7 @@ describe("HTTP server", () => {
       );
     });
 
-    it("should response 404 when username is not found", async () => {
+    it("should response 400 when username is not found", async () => {
       // Arrange
       const requestPayload = {
         username: "dicoding",
@@ -286,7 +286,7 @@ describe("HTTP server", () => {
 
       // Assert
       const responseJson = JSON.parse(response.payload);
-      expect(response.statusCode).toEqual(404);
+      expect(response.statusCode).toEqual(400);
       expect(responseJson.status).toEqual("fail");
       expect(responseJson.message).toEqual("user tidak ditemukan");
     });
@@ -499,7 +499,9 @@ describe("HTTP server", () => {
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(400);
       expect(responseJson.status).toEqual("fail");
-      expect(responseJson.message).toEqual("refresh token tidak valid");
+      expect(responseJson.message).toEqual(
+        "refresh token tidak ditemukan di database"
+      );
     });
   });
 });
