@@ -9,12 +9,6 @@ const routes = (handler) => [
       description: "POST authentications",
       notes: "Test",
       tags: ["api", "auth"],
-      validate: {
-        payload: Joi.object({
-          username: Joi.string(),
-          password: Joi.string(),
-        }).label("Post-authentications-payload"),
-      },
       response: {
         schema: Joi.object({
           status: "success",
@@ -34,11 +28,6 @@ const routes = (handler) => [
       description: "PUT authentications",
       notes: "Test",
       tags: ["api", "auth"],
-      validate: {
-        payload: Joi.object({
-          refreshToken: Joi.string(),
-        }).label("Put-authentications-payload"),
-      },
       response: {
         schema: Joi.object({
           status: "success",
@@ -57,14 +46,10 @@ const routes = (handler) => [
       description: "DELETE authentications",
       notes: "Test",
       tags: ["api", "auth"],
-      validate: {
-        payload: Joi.object({
-          refreshToken: Joi.string(),
-        }).label("Delete-authentications-payload"),
-      },
       response: {
         schema: Joi.object({
           status: "success",
+          message: Joi.string(),
         }).label("Delete-authentications-response"),
       },
     },
