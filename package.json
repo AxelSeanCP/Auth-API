@@ -16,10 +16,14 @@
   "description": "",
   "dependencies": {
     "@hapi/hapi": "^21.3.10",
+    "@hapi/inert": "^7.1.0",
     "@hapi/jwt": "^3.2.0",
+    "@hapi/vision": "^7.0.3",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
+    "hapi-swagger": "^17.3.0",
     "instances-container": "^2.0.6",
+    "joi": "^17.13.3",
     "nanoid": "^3.3.7",
     "pg": "^8.13.0"
   },

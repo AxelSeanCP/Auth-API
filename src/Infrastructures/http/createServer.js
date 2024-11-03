@@ -1,10 +1,19 @@
 const Hapi = require("@hapi/hapi");
-const jwt = require("@hapi/jwt");
+const HapiSwagger = require("hapi-swagger");
+const Inert = require("@hapi/inert");
+const Vision = require("@hapi/vision");
 const users = require("../../Interfaces/http/api/users");
 const config = require("../../Commons/config");
 const DomainErrorTranslator = require("../../Commons/exceptions/DomainErrorTranslator");
 const ClientError = require("../../Commons/exceptions/ClientError");
 const authentications = require("../../Interfaces/http/api/authentications");
+
+const swaggerOptions = {
+  info: {
+    title: "Auth API Documentation",
+    version: "1.0.0",
+  },
+};
 
 const createServer = async (container) => {
   const server = Hapi.server({
@@ -21,6 +30,16 @@ const createServer = async (container) => {
     {
       plugin: authentications,
       options: { container },
+    },
+    {
+      plugin: Inert,
+    },
+    {
+      plugin: Vision,
+    },
+    {
+      plugin: HapiSwagger,
+      options: swaggerOptions,
     },
   ]);
 
@@ -60,6 +79,7 @@ const createServer = async (container) => {
         message: "terjadi kegagalan pada server kami",
       });
       newResponse.code(500);
+      console.log(newResponse);
       return newResponse;
     }
 
